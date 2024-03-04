@@ -94,5 +94,24 @@ public class BooksController : Controller
        return View();
     }
    
+   public IActionResult UnRegister()
+    {
+        return View();
+    }
+
+    [HttpPost]
+    public IActionResult UnRegister([FromForm] Book book)
+    {
+        var matchingBook = _library.Books.SingleOrDefault(eachBook => eachBook.Title == book.Title);
+        if (matchingBook == null)
+        {
+            return NotFound();
+        }
+        _library.Books.Remove(matchingBook);
+        _library.SaveChanges();
+        return RedirectToAction(nameof(ViewAll));
+    }
+
    
+    
 }

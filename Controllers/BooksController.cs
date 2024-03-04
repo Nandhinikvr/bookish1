@@ -46,7 +46,6 @@ public class BooksController : Controller
     }
      
     [HttpPost]
-
     public IActionResult SearchABook([FromForm] int id)
     {
         var matchingBook = _library.Books.SingleOrDefault(book => book.Id == id);
@@ -54,7 +53,8 @@ public class BooksController : Controller
         {
             return NotFound();
         }
-        return View(matchingBook);
+        return  RedirectToAction(nameof(ViewIndividual), new { id = id });
+        // return View("/Views/Books/ViewIndividual.cshtml",matchingBook);
     }
     public IActionResult Register()
     {

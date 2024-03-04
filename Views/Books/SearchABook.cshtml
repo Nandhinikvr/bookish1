@@ -1,0 +1,42 @@
+@using Bookish.Models.Data;
+@model Book;
+
+@{
+    ViewData["Title"] = "Search by Id/Title page";
+}
+
+<div class="text-center">
+     <form method="get" action="@Url.Action("Books", "SearchABook")">
+        <input type="text" class="form-control" placeholder="Enter Book Title" name="searchId" id="searchId" aria-label="searchId">
+        <button type="submit" class="btn btn-outline-primary">Search</button>
+    </form>
+
+<!-- 
+
+    <h1 class="display-4">Search by Id</h1>
+    <form method="post">
+        <div>
+            <label for="title">Id</label>
+            <input type="text" id="Id" name="Id">
+        </div>
+        <button type="submit">Submit</button>
+    </form>
+    <h1 class="display-4">Search by Name</h1>
+
+    <form method="post">
+        <div>
+            <label for="title">Title</label>
+            <input type="text" id="title" name="title">
+        </div>
+        <button type="submit">Submit</button>
+    </form>
+    <h1 class="display-4">Search by Author</h1>
+
+    <form method="post">
+        <div>
+            <label for="title">Title</label>
+            <input type="text" id="title" name="title">
+        </div>
+        <button type="submit">Submit</button>
+    </form> -->
+</div>

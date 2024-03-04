@@ -9,4 +9,6 @@
     <h1 class="display-4">@Model.Title</h1>
     <h2>By @Model.Author</h2>
     <p>Number of copies: @Model.Copies.Count</p>
-</div>
+    <P>To update a book please click the Link</P>
+    <a asp-area="" asp-controller="Books" asp-action="EditBook" asp-route-id="@Model.Id">Edit book</a>
+ </div>

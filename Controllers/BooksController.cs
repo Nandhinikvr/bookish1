@@ -40,6 +40,22 @@ public class BooksController : Controller
         return View(matchingBook);
     }
 
+    public IActionResult SearchABook()
+    {
+        return View();
+    }
+     
+    [HttpPost]
+
+    public IActionResult SearchABook([FromForm] int id)
+    {
+        var matchingBook = _library.Books.SingleOrDefault(book => book.Id == id);
+        if (matchingBook == null)
+        {
+            return NotFound();
+        }
+        return View(matchingBook);
+    }
     public IActionResult Register()
     {
         return View();
@@ -52,4 +68,31 @@ public class BooksController : Controller
         _library.SaveChanges();
         return RedirectToAction(nameof(ViewAll));
     }
+
+    [HttpPost]
+    public IActionResult EditBook([FromRoute] int id, [FromForm] Book book)
+    {
+        var matchingBook = _library.Books.SingleOrDefault(book => book.Id == id);
+        if (matchingBook == null)
+        {
+            return NotFound();
+        }   
+        matchingBook.Title= book.Title;       
+        _library.SaveChanges();
+        return RedirectToAction(nameof(ViewAll));
+    }
+    
+//    [HttpGet("[controller]/{id}")]
+    public IActionResult EditBook([FromRoute] int id)
+    {
+        var matchingBook = _library.Books.SingleOrDefault(book => book.Id == id);
+        if (matchingBook == null)
+        {
+            return NotFound();
+        }
+    
+       return View();
+    }
+   
+   
 }

@@ -30,16 +30,6 @@ public class BooksController : Controller
         return View(viewModel);
     }
 
-    public IActionResult ViewIndividual([FromRoute] int id)
-    {
-        var matchingBook = _library.Books.SingleOrDefault(book => book.Id == id);
-        if (matchingBook == null)
-        {
-            return NotFound();
-        }
-        return View(matchingBook);
-    }
-
     public IActionResult SearchABook()
     {
         return View();
@@ -56,17 +46,27 @@ public class BooksController : Controller
         return  RedirectToAction(nameof(ViewIndividual), new { id = id });
         // return View("/Views/Books/ViewIndividual.cshtml",matchingBook);
     }
-    public IActionResult Register()
+
+    public IActionResult ViewIndividual([FromRoute] int id)
     {
-        return View();
+        var matchingBook = _library.Books.SingleOrDefault(book => book.Id == id);
+        if (matchingBook == null)
+        {
+            return NotFound();
+        }
+        return View(matchingBook);
     }
 
-    [HttpPost]
-    public IActionResult Register([FromForm] Book book)
+    // enter from ViewIndividual page
+    public IActionResult EditBook([FromRoute] int id)
     {
-        _library.Books.Add(book);
-        _library.SaveChanges();
-        return RedirectToAction(nameof(ViewAll));
+        var matchingBook = _library.Books.SingleOrDefault(book => book.Id == id);
+        if (matchingBook == null)
+        {
+            return NotFound();
+        }
+    
+       return View();
     }
 
     [HttpPost]
@@ -82,8 +82,10 @@ public class BooksController : Controller
         return RedirectToAction(nameof(ViewAll));
     }
     
-//    [HttpGet("[controller]/{id}")]
-    public IActionResult EditBook([FromRoute] int id)
+
+
+    // enter from ViewIndividual page
+    public IActionResult AddCopy([FromRoute] int id)
     {
         var matchingBook = _library.Books.SingleOrDefault(book => book.Id == id);
         if (matchingBook == null)
@@ -92,6 +94,19 @@ public class BooksController : Controller
         }
     
        return View();
+    }
+
+    public IActionResult Register()
+    {
+        return View();
+    }
+
+    [HttpPost]
+    public IActionResult Register([FromForm] Book book)
+    {
+        _library.Books.Add(book);
+        _library.SaveChanges();
+        return RedirectToAction(nameof(ViewAll));
     }
    
    public IActionResult UnRegister()
@@ -111,7 +126,4 @@ public class BooksController : Controller
         _library.SaveChanges();
         return RedirectToAction(nameof(ViewAll));
     }
-
-   
-    
-}
+   }

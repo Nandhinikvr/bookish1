@@ -1,0 +1,22 @@
+
+@using Bookish.Enums;
+@model Condition;
+
+
+@{
+    ViewData["Title"] = "AddCopy";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Add a book copy</h1>
+    <form method="post">
+        <select class="form-select" aria-label="Default select example">
+        <option selected>Select the copy condition</option>
+        <option value="Pristine">@Condition.Pristine</option>
+        <option value="Good">@Condition.Good</option>
+        <option value="Average">@Condition.Average</option>
+        <option value="Poor">@Condition.Poor</option>
+        </select>        
+        <button type="submit">Add one copy</button>
+    </form>
+</div>
